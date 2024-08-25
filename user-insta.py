@@ -3,6 +3,8 @@ import string
 import requests
 import time
 import getpass
+import os
+os.system=("pip install colorama")
 from itertools import cycle
 from concurrent.futures import ThreadPoolExecutor
 from colorama import Fore, Style, init
@@ -36,7 +38,7 @@ def print_banner():
     print(Style.RESET_ALL)  # إعادة تعيين الألوان
 
     # طباعة رسالة الترحيب بعد الشعار
-    welcome_message = f"{Fore.GREEN}{Style.BRIGHT}Welcome to the OTH Instagram Username Checker!{Style.RESET_ALL}"
+    welcome_message = f"{Fore.GREEN}{Style.BRIGHT}مرحبا بكم في أدة OTH  {Style.RESET_ALL}"
     print("\n" + welcome_message)
 
 def generate_username(length):
@@ -70,7 +72,7 @@ def process_usernames(length):
     unavailable_usernames = []
 
     print(f"{Fore.YELLOW}Checking usernames of length {length} characters...{Style.RESET_ALL}")
-    for _ in range(100):  # يمكنك تعديل عدد المحاولات هنا
+    for _ in range(100000):  # يمكنك تعديل عدد المحاولات هنا
         username = generate_username(length)
         result = check_username_availability(username)
         if result is True:
@@ -80,7 +82,7 @@ def process_usernames(length):
         elif result is False:
             unavailable_usernames.append(username)
             print(f"{Fore.RED}Taken: {username}{Style.RESET_ALL}")
-        time.sleep(0.1)  # انتظار قصير لتجنب الحظر
+        time.sleep(0)  # انتظار قصير لتجنب الحظر
 
     return available_usernames, unavailable_usernames
 
@@ -103,8 +105,8 @@ def main():
     print_banner()
 
     # طلب معلومات بوت تليجرام من المستخدم مع التحقق من المدخلات
-    TELEGRAM_BOT_TOKEN = validate_input(f"{Fore.BLUE}Please enter your Telegram Bot Token (without @ or ^):{Style.RESET_ALL} ")
-    TELEGRAM_CHAT_ID = validate_input(f"{Fore.BLUE}Please enter your Telegram Chat ID (without @ or ^):{Style.RESET_ALL} ")
+    TELEGRAM_BOT_TOKEN = validate_input(f"{Fore.BLUE}Telegram Bot Token:{Style.RESET_ALL} ")
+    TELEGRAM_CHAT_ID = validate_input(f"{Fore.BLUE}YOUR  TELEGRAM ID :{Style.RESET_ALL} ")
 
     # الحصول على اسم مستخدم الجهاز تلقائيًا
     local_username = getpass.getuser()
@@ -127,7 +129,7 @@ def main():
     elif choice == "3":
         lengths = [4]
     else:
-        print(f"{Fore.RED}Invalid choice! Exiting...{Style.RESET_ALL}")
+        print(f"{Fore.RED}هذا الاختيار غير متاح...{Style.RESET_ALL}")
         return
 
     all_available = []
